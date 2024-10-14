@@ -1,101 +1,83 @@
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+interface BlogCardProps {
+  imageSrc: string;
+  imageAlt: string;
+  badges: string[];
+  title: string;
+  description: string;
+  link: string;
+}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+function ArrowIcon() {
+  return (
+    <svg className="w-5 h-5 relative" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="arrow-right-line">
+        <path id="Vector"
+          d="M13.4763 9.16658L9.00633 4.69657L10.1848 3.51807L16.6667 9.99992L10.1848 16.4817L9.00633 15.3032L13.4763 10.8332H3.33333V9.16658H13.4763Z"
+          fill="#4338CA" />
+      </g>
+    </svg>
+  )
+}
+
+
+const BlogCard: React.FC<BlogCardProps> = ({ imageSrc, imageAlt, badges, title, description, link }) => {
+  return (
+    <article className="w-[340px] h-[504px] bg-white rounded-lg shadow flex-col justify-start items-start inline-flex">
+      {/* Image */}
+      <figure>
+        <Image
+          src={"/images" + imageSrc}
+          alt={imageAlt}
+          className="h-72 relative rounded-t-lg"
+          width={340}
+          height={288}
+        />
+      </figure>
+
+      <div className="h-[216px] px-4 py-6 flex-col justify-start items-start gap-3 inline-flex">
+        <div className="self-stretch h-[60px] flex-col justify-start items-start gap-2 flex">
+          <div className="px-2 py-0.5 bg-green-50 rounded-full border border-green-200 justify-start items-center inline-flex">
+            {badges.map((badge, index) => (
+              <div key={index} className="text-center text-green-700 text-sm font-normal leading-tight">
+                {badge}
+              </div>
+            ))}
+          </div>
+
+          <div className="self-stretch text-neutral-900 text-lg font-semibold leading-7">{title}</div>
+        </div>
+        <div className="self-stretch h-24 flex-col justify-start items-start gap-6 flex">
+          <div className="self-stretch text-neutral-600 text-base font-medium leading-normal">{description}</div>
+          <a className="rounded justify-center items-center gap-1.5 inline-flex" href={link}>
+            <div className="px-0.5 justify-center items-center flex">
+              <div className="text-indigo-700 text-base font-medium leading-normal">Read more</div>
+            </div>
+            <ArrowIcon />
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </div>
+    </article >
+  );
+};
+
+
+export default function Home() {
+  return (
+    <main className="min-h-screen flex justify-center items-center">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-8 px-4 md:px-8 lg:px-8 h-screen py-[200px]">
+        <div className='md:col-start-2 lg:col-start-5 col-span-4 '>
+          <BlogCard
+            imageSrc="/spacejoy-YqFz7UMm8qE-unsplash.jpg"
+            imageAlt="Top 5 Living Room Inspirations"
+            badges={["Interior"]}
+            title="Top 5 Living Room Inspirations"
+            description="Curated vibrants colors for your living, make it pop & calm in the same time.."
+            link="/posts/ai-future"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 }
