@@ -33,6 +33,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ imageSrc, imageAlt, badges, title, 
           className="h-72 relative rounded-t-lg"
           width={340}
           height={288}
+          quality={100}
           style={{ objectFit: "cover" }}
         />
       </figure>
@@ -50,10 +51,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ imageSrc, imageAlt, badges, title, 
           <div className="self-stretch text-neutral-900 text-lg font-semibold leading-7">{title}</div>
         </div>
         <div className="self-stretch h-24 flex-col justify-start items-start gap-6 flex">
-          <div className="self-stretch text-neutral-600 text-base font-normal">{description}</div>
+          <div className="self-stretch text-neutral-600 text-base font-medium leading-normal">{description}</div>
           <a className="rounded justify-center items-center gap-1.5 inline-flex" href={link}>
             <div className="px-0.5 justify-center items-center flex">
-              <div className="text-indigo-700 text-base font-normal">Read more</div>
+              <div className="text-indigo-700 text-base font-medium leading-normal">Read more</div>
             </div>
             <ArrowIcon />
           </a>
