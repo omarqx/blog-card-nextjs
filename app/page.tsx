@@ -66,7 +66,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ imageSrc, imageAlt, badges, title, 
 export default function Home() {
   return (
     <main className="min-h-screen flex justify-center items-center">
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-8 px-4 md:px-8 lg:px-8 h-screen py-[200px]">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-8 px-4 md:px-8 lg:px-8 h-screen py-[120px]">
         <div className='md:col-start-2 lg:col-start-5 col-span-4 '>
           <BlogCard
             imageSrc="/spacejoy-YqFz7UMm8qE-unsplash.jpg"
